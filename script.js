@@ -121,6 +121,10 @@ function ensureDesignBrief(reference) {
     reference.designBrief = {};
   }
 
+  if (!reference.designBrief.customerDeadline) {
+    reference.designBrief.customerDeadline = '';
+  }
+
   reference.designBrief.needToProvide = reference.designBrief.needToProvide || {
     renderings: false,
     viewer3d: false,
@@ -759,9 +763,10 @@ function getDesignBriefEntries(reference, includeAccount = false, accountName = 
 
   briefEntries.push(
     ['Style / SKU', reference.designBrief.styleSku || '—'],
-    ['Metal', reference.designBrief.metal || '—'],
-    ['Size', reference.designBrief.size || '—'],
-    ['Stone Dimension & Description', reference.designBrief.stoneDescription || '—'],
+    ['Metal/Color', reference.designBrief.metal || '—'],
+    ['Finger Size', reference.designBrief.size || '—'],
+    ['Center Stone Dimensions/Carat Weight/Description', reference.designBrief.stoneDescription || '—'],
+    ['Customer Deadline', reference.designBrief.customerDeadline || '—'],
     ['Instructions', reference.designBrief.instructions || '—'],
     ['Need to Provide', formatNeedToProvide(reference.designBrief.needToProvide)],
   );
@@ -1161,6 +1166,7 @@ function getSearchableTokens(project) {
     reference.designBrief.metal,
     reference.designBrief.size,
     reference.designBrief.stoneDescription,
+    reference.designBrief.customerDeadline,
     reference.designBrief.instructions,
   ]);
 
@@ -1334,6 +1340,7 @@ function createProjectFromForm() {
     const metal = card.querySelector('[data-field="metal"]').value.trim();
     const size = card.querySelector('[data-field="size"]').value.trim();
     const stoneDescription = card.querySelector('[data-field="stoneDescription"]').value.trim();
+    const customerDeadline = card.querySelector('[data-field="customerDeadline"]').value.trim();
     const uploadInput = card.querySelector('[data-field="uploads"]');
     const files = [...uploadInput.files].map((file) => file.name);
     const needToProvide = {
@@ -1352,6 +1359,7 @@ function createProjectFromForm() {
         metal,
         size,
         stoneDescription,
+        customerDeadline,
         instructions,
         files,
         needToProvide,
