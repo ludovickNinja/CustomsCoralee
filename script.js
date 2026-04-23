@@ -1330,6 +1330,7 @@ function createProjectFromForm() {
   const formData = new FormData(quoteForm);
   const requestText = (formData.get('reference') || '').toString().trim() || 'General quote request';
   const salesPersonName = (formData.get('salespersonName') || '').toString().trim() || 'Not provided';
+  const customerDeadline = (formData.get('customerDeadline') || '').toString().trim();
 
   const projectAccount = ['admin', 'factory'].includes(currentMode) ? 'account1' : currentMode;
 
@@ -1340,7 +1341,6 @@ function createProjectFromForm() {
     const metal = card.querySelector('[data-field="metal"]').value.trim();
     const size = card.querySelector('[data-field="size"]').value.trim();
     const stoneDescription = card.querySelector('[data-field="stoneDescription"]').value.trim();
-    const customerDeadline = card.querySelector('[data-field="customerDeadline"]').value.trim();
     const uploadInput = card.querySelector('[data-field="uploads"]');
     const files = [...uploadInput.files].map((file) => file.name);
     const needToProvide = {
