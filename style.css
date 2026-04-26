@@ -31,6 +31,12 @@ body {
   padding: 12px 20px;
 }
 
+.top-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .top-bar h1 {
   font-size: 1rem;
   margin: 0;
@@ -54,6 +60,20 @@ body {
 .mode-btn.active {
   background: var(--primary);
   border-color: var(--primary);
+}
+
+.top-tab-btn {
+  border: 1px solid #4b5563;
+  background: #1f2937;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.top-tab-btn:hover {
+  background: #374151;
 }
 
 .layout {

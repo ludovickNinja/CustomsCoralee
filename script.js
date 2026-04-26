@@ -1,6 +1,7 @@
 const versionsContainer = document.getElementById('versions-container');
 const versionTemplate = document.getElementById('version-template');
 const addVersionButton = document.getElementById('add-version');
+const openSettingsButton = document.getElementById('open-settings');
 const quoteForm = document.getElementById('quote-form');
 const accountInput = quoteForm?.querySelector('input[name="account"]');
 const modeButtons = [...document.querySelectorAll('.mode-btn')];
@@ -123,6 +124,10 @@ function ensureDesignBrief(reference) {
 
   if (!reference.designBrief.customerDeadline) {
     reference.designBrief.customerDeadline = '';
+  }
+
+  if (!reference.designBrief.collection) {
+    reference.designBrief.collection = '';
   }
 
   reference.designBrief.needToProvide = reference.designBrief.needToProvide || {
@@ -762,6 +767,7 @@ function getDesignBriefEntries(reference, includeAccount = false, accountName = 
   }
 
   briefEntries.push(
+    ['Collection', reference.designBrief.collection || '—'],
     ['Style / SKU', reference.designBrief.styleSku || '—'],
     ['Metal/Color', reference.designBrief.metal || '—'],
     ['Finger Size', reference.designBrief.size || '—'],
@@ -1162,6 +1168,7 @@ function getSearchableTokens(project) {
     reference.referenceNumber,
     reference.versionLabel,
     getAdminStatus(reference),
+    reference.designBrief.collection,
     reference.designBrief.styleSku,
     reference.designBrief.metal,
     reference.designBrief.size,
@@ -1338,6 +1345,7 @@ function createProjectFromForm() {
   const references = versionCards.map((card, index) => {
     const instructions = card.querySelector('[data-field="instructions"]').value.trim();
     const styleSku = card.querySelector('[data-field="styleSku"]').value.trim();
+    const collection = card.querySelector('[data-field="collection"]').value.trim();
     const metal = card.querySelector('[data-field="metal"]').value.trim();
     const size = card.querySelector('[data-field="size"]').value.trim();
     const stoneDescription = card.querySelector('[data-field="stoneDescription"]').value.trim();
@@ -1356,6 +1364,7 @@ function createProjectFromForm() {
       adminRenderings: [],
       designBrief: {
         styleSku,
+        collection,
         metal,
         size,
         stoneDescription,
@@ -1422,6 +1431,14 @@ pageButtons.forEach((button) => {
   button.addEventListener('click', () => {
     setPage(button.dataset.page);
   });
+});
+
+openSettingsButton?.addEventListener('click', () => {
+  if (currentMode === 'admin' || currentMode === 'factory') {
+    setMode('account1');
+  }
+
+  setPage('settings');
 });
 
 projectsTableBody?.addEventListener('click', (event) => {
