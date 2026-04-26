@@ -9,12 +9,15 @@
   <body>
     <header class="top-bar">
       <h1>Custom Platform POC</h1>
-      <nav class="mode-switch" aria-label="Platform mode switch">
-        <button type="button" class="mode-btn active" data-mode="account1">Account 1</button>
-        <button type="button" class="mode-btn" data-mode="account2">Account 2</button>
-        <button type="button" class="mode-btn" data-mode="admin">Admin</button>
-        <button type="button" class="mode-btn" data-mode="factory">Factory</button>
-      </nav>
+      <div class="top-bar-controls">
+        <nav class="mode-switch" aria-label="Platform mode switch">
+          <button type="button" class="mode-btn active" data-mode="account1">Account 1</button>
+          <button type="button" class="mode-btn" data-mode="account2">Account 2</button>
+          <button type="button" class="mode-btn" data-mode="admin">Admin</button>
+          <button type="button" class="mode-btn" data-mode="factory">Factory</button>
+        </nav>
+        <button type="button" id="open-settings" class="top-tab-btn">Settings</button>
+      </div>
     </header>
 
     <main class="layout" data-current-mode="account1">
@@ -139,6 +142,16 @@
                   <tbody id="projects-table-body"></tbody>
                 </table>
               </div>
+            </article>
+          </section>
+
+          <section id="page-settings" class="customer-page">
+            <article class="card">
+              <h2>Settings</h2>
+              <p>
+                Collection selection is now available in each <strong>Reference Details</strong> version card
+                inside the account form.
+              </p>
             </article>
           </section>
 
@@ -521,6 +534,23 @@
         </div>
 
         <div class="grid-3">
+          <label>
+            Collection
+            <select data-field="collection">
+              <option value="">Select collection</option>
+              <option value="CrownRing">CrownRing</option>
+              <option value="MFit">MFit</option>
+              <option value="MyCaroline">MyCaroline</option>
+              <option value="Bleu Royale">Bleu Royale</option>
+              <option value="Carlex">Carlex</option>
+              <option value="NOAM CARVER - Bridal">NOAM CARVER - Bridal</option>
+              <option value="NOAM CARVER - Atelier">NOAM CARVER - Atelier</option>
+              <option value="NOAM CARVER - Stackables">NOAM CARVER - Stackables</option>
+              <option value="NOAM CARVER - Glow">NOAM CARVER - Glow</option>
+              <option value="NOAM CARVER - Luna">NOAM CARVER - Luna</option>
+            </select>
+          </label>
+
           <label>
             Style #
             <input type="text" data-field="styleSku" />
